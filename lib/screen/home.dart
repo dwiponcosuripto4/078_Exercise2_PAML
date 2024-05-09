@@ -16,6 +16,12 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: Text('Wisata Kuliner'),
       ),
+      body: ListView.builder(
+        itemCount: widget.spotData.length,
+        itemBuilder: (context, index) {
+          return _buildSpotCard(context, widget.spotData[index]);
+        },
+      ),
     );
   }
 
