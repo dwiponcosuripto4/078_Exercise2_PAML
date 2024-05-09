@@ -102,4 +102,34 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
       ],
     );
   }
+
+  Widget _buildRatingRadio() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Rating'),
+        Row(
+          children: [1, 2, 3, 4, 5]
+              .map(
+                (rating) => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Radio(
+                      value: rating,
+                      groupValue: _rating,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _rating = value!;
+                        });
+                      },
+                    ),
+                    Text(rating.toString()),
+                  ],
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
+  }
 }
