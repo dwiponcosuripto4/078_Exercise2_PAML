@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker:
-  cupertino_icons: ^1.0.6
   http: ^1.2.1
   path: ^1.9.0
 
