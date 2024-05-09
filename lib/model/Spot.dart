@@ -5,8 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class Spot {
   final String namaTempat;
-  final List<String>
-      jenisKuliner; // Menggunakan List<String> untuk jenis kuliner
+  final List<String> jenisKuliner;
   final String makananFavorit;
   final String minumanFavorit;
   final String gambar;
