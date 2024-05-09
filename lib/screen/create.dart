@@ -57,4 +57,26 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
       ],
     );
   }
+
+  Widget _buildRadio(String title) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Radio(
+          value: title,
+          groupValue: _jenisKuliner.contains(title) ? title : null,
+          onChanged: (String? value) {
+            setState(() {
+              if (_jenisKuliner.contains(value)) {
+                _jenisKuliner.remove(value);
+              } else {
+                _jenisKuliner.add(value!);
+              }
+            });
+          },
+        ),
+        Text(title),
+      ],
+    );
+  }
 }
