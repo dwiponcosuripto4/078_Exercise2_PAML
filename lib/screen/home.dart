@@ -1,16 +1,21 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  final List<Map<String, dynamic>> spotData;
+
+  HomeView({required this.spotData});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Wisata Kuliner'),
+      ),
+    );
   }
 }
