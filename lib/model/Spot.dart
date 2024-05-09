@@ -14,7 +14,6 @@ class Spot {
   final String jamBuka;
   final String jamTutup;
   final int rating;
-  final String catatan;
   Spot({
     required this.namaTempat,
     required this.jenisKuliner,
@@ -26,7 +25,6 @@ class Spot {
     required this.jamBuka,
     required this.jamTutup,
     required this.rating,
-    required this.catatan,
   });
 
   Spot copyWith({
@@ -40,7 +38,6 @@ class Spot {
     String? jamBuka,
     String? jamTutup,
     int? rating,
-    String? catatan,
   }) {
     return Spot(
       namaTempat: namaTempat ?? this.namaTempat,
@@ -53,7 +50,6 @@ class Spot {
       jamBuka: jamBuka ?? this.jamBuka,
       jamTutup: jamTutup ?? this.jamTutup,
       rating: rating ?? this.rating,
-      catatan: catatan ?? this.catatan,
     );
   }
 
@@ -69,7 +65,6 @@ class Spot {
       'jamBuka': jamBuka,
       'jamTutup': jamTutup,
       'rating': rating,
-      'catatan': catatan,
     };
   }
 
@@ -85,7 +80,6 @@ class Spot {
       jamBuka: map['jamBuka'] as String,
       jamTutup: map['jamTutup'] as String,
       rating: map['rating'] as int,
-      catatan: map['catatan'] as String,
     );
   }
 
@@ -96,7 +90,7 @@ class Spot {
 
   @override
   String toString() {
-    return 'Spot(namaTempat: $namaTempat, jenisKuliner: $jenisKuliner, makananFavorit: $makananFavorit, minumanFavorit: $minumanFavorit, gambar: $gambar, noTelepon: $noTelepon, lokasi: $lokasi, jamBuka: $jamBuka, jamTutup: $jamTutup, rating: $rating, catatan: $catatan)';
+    return 'Spot(namaTempat: $namaTempat, jenisKuliner: $jenisKuliner, makananFavorit: $makananFavorit, minumanFavorit: $minumanFavorit, gambar: $gambar, noTelepon: $noTelepon, lokasi: $lokasi, jamBuka: $jamBuka, jamTutup: $jamTutup, rating: $rating)';
   }
 
   @override
@@ -112,8 +106,7 @@ class Spot {
         other.lokasi == lokasi &&
         other.jamBuka == jamBuka &&
         other.jamTutup == jamTutup &&
-        other.rating == rating &&
-        other.catatan == catatan;
+        other.rating == rating;
   }
 
   @override
@@ -127,7 +120,6 @@ class Spot {
         lokasi.hashCode ^
         jamBuka.hashCode ^
         jamTutup.hashCode ^
-        rating.hashCode ^
-        catatan.hashCode;
+        rating.hashCode;
   }
 }
