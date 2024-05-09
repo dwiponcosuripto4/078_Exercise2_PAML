@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:exercise2/model/Spot.dart';
 
 class CreateSpotForm extends StatefulWidget {
   @override
@@ -35,7 +36,101 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Create Spot'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              _buildImagePicker(),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: _namaTempatController,
+                decoration: InputDecoration(labelText: 'Nama Tempat'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Nama Tempat tidak boleh kosong';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20.0),
+              _buildJenisKulinerRadio(),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: _makananFavoritController,
+                decoration: InputDecoration(labelText: 'Makanan Favorit'),
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: _minumanFavoritController,
+                decoration: InputDecoration(labelText: 'Minuman Favorit'),
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: _noTeleponController,
+                decoration: InputDecoration(labelText: 'Nomor Telepon'),
+                keyboardType: TextInputType.phone,
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: _lokasiController,
+                decoration: InputDecoration(labelText: 'Lokasi'),
+              ),
+              SizedBox(height: 20.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _jamBukaController,
+                      decoration: InputDecoration(labelText: 'Jam Buka'),
+                    ),
+                  ),
+                  SizedBox(width: 20.0),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _jamTutupController,
+                      decoration: InputDecoration(labelText: 'Jam Tutup'),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.0),
+              _buildRatingRadio(),
+              SizedBox(height: 20.0),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    // Wrap the data and image path in a container before sending
+                    Spot data = Spot(
+                      namaTempat: _namaTempatController.text,
+                      jenisKuliner: _jenisKuliner,
+                      makananFavorit: _makananFavoritController.text,
+                      minumanFavorit: _minumanFavoritController.text,
+                      gambar: _image!.path,
+                      noTelepon: _noTeleponController.text,
+                      lokasi: _lokasiController.text,
+                      jamBuka: _jamBukaController.text,
+                      jamTutup: _jamTutupController.text,
+                      rating: _rating,
+                    );
+
+                    Navigator.pop(context,
+                        data); // Kembali ke halaman sebelumnya dengan membawa data yang baru ditambahkan
+                  }
+                },
+                child: Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildImagePicker() {
