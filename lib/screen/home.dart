@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:exercise2/screen/create.dart';
 
 class HomeView extends StatefulWidget {
   final List<Map<String, dynamic>> spotData;
@@ -21,6 +22,20 @@ class _HomeViewState extends State<HomeView> {
         itemBuilder: (context, index) {
           return _buildSpotCard(context, widget.spotData[index]);
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final newSpot = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateSpotForm()),
+          );
+          if (newSpot != null) {
+            setState(() {
+              widget.spotData.add(newSpot.toMap());
+            });
+          }
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
