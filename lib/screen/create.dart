@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 
 class CreateSpotForm extends StatefulWidget {
@@ -34,5 +36,25 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
+  }
+
+  Widget _buildImagePicker() {
+    return Column(
+      children: [
+        _image == null
+            ? Text('Pilih gambar tempat')
+            : Image.file(
+                _image!,
+                height: 200.0,
+                width: 200.0,
+                fit: BoxFit.cover,
+              ),
+        SizedBox(height: 10.0),
+        ElevatedButton(
+          onPressed: _getImage,
+          child: Text('Pilih Gambar'),
+        ),
+      ],
+    );
   }
 }
