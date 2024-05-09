@@ -79,4 +79,27 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
       ],
     );
   }
+
+  Widget _buildJenisKulinerRadio() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Jenis Kuliner'),
+        Wrap(
+          spacing: 8.0,
+          children: [
+            _buildRadio('Ayam'),
+            _buildRadio('Bebek'),
+            _buildRadio('Ikan'),
+            _buildRadio('Seafood'),
+            _buildRadio('Daging'),
+            _buildRadio('Dessert'),
+            _buildRadio('Bakaran'),
+            _buildRadio('Tradisional'),
+            _buildRadio('Sup'),
+          ],
+        ),
+      ],
+    );
+  }
 }
