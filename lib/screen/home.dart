@@ -69,7 +69,9 @@ class _HomeViewState extends State<HomeView> {
             context,
             MaterialPageRoute(builder: (context) => CreateSpotForm()),
           );
-          if (newSpot != null) {}
+          if (newSpot != null) {
+            await _refreshSpotData();
+          }
         },
         child: Icon(Icons.add),
       ),
@@ -125,6 +127,19 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
+            ),
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () async {
+                bool success = await _spotController.deleteSpot(spot.id);
+                if (success) {
+                  await _refreshSpotData(); // Refresh data after deletion
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Failed to delete spot.')),
+                  );
+                }
+              },
             ),
           ],
         ),
