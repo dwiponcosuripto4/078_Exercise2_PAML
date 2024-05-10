@@ -22,4 +22,25 @@ class SpotService {
     );
     return response.statusCode == 200;
   }
+
+  Future<bool> addSpot(Spot spot) async {
+    Map<String, dynamic> data = {
+      'namaTempat': spot.namaTempat,
+      'jenisKuliner': spot.jenisKuliner,
+      'makananFavorit': spot.makananFavorit,
+      'minumanFavorit': spot.minumanFavorit,
+      'noTelepon': spot.noTelepon,
+      'lokasi': spot.lokasi,
+      'jamBuka': spot.jamBuka,
+      'jamTutup': spot.jamTutup,
+      'rating': spot.rating,
+    };
+
+    final response = await http.post(
+      Uri.parse('$baseUrl/create.php'),
+      body: data,
+    );
+
+    return response.statusCode == 200;
+  }
 }
