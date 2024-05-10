@@ -43,4 +43,13 @@ class SpotService {
 
     return response.statusCode == 200;
   }
+
+  Future<bool> updateSpot(Spot spot) async {
+    Map<String, dynamic> data = spot.toMap();
+    final response = await http.post(
+      Uri.parse('$baseUrl/update.php'),
+      body: data,
+    );
+    return response.statusCode == 200;
+  }
 }
