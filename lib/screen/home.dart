@@ -1,5 +1,6 @@
 import 'package:exercise2/controller/SpotController.dart';
 import 'package:exercise2/screen/create.dart';
+import 'package:exercise2/screen/edit.dart';
 import 'package:flutter/material.dart';
 import 'package:exercise2/model/Spot.dart';
 
@@ -41,7 +42,23 @@ class _HomeViewState extends State<HomeView> {
             final spotData = snapshot.data!;
             return ListView.builder(
               itemCount: spotData.length,
-              itemBuilder: (context, index) {},
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () async {
+                    final updatedSpot = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            EditSpotForm(spot: spotData[index]),
+                      ),
+                    );
+                    if (updatedSpot != null) {
+                      await _refreshSpotData();
+                    }
+                  },
+                  child: _buildSpotCard(context, spotData[index]),
+                );
+              },
             );
           }
         },
