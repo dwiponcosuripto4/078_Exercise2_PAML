@@ -1,3 +1,4 @@
+import 'package:exercise2/controller/SpotController.dart';
 import 'package:exercise2/screen/create.dart';
 import 'package:flutter/material.dart';
 import 'package:exercise2/model/Spot.dart';
@@ -8,11 +9,19 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final SpotController _spotController = SpotController();
   late Future<List<Spot>> _spotDataFuture;
 
   @override
   void initState() {
     super.initState();
+    _refreshSpotData();
+  }
+
+  Future<void> _refreshSpotData() async {
+    setState(() {
+      _spotDataFuture = _spotController.getData();
+    });
   }
 
   @override
