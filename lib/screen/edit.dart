@@ -145,4 +145,45 @@ class _EditSpotFormState extends State<EditSpotForm> {
       ),
     );
   }
+
+  Widget _buildRadio(String title) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Radio(
+          value: title,
+          groupValue: _jenisKuliner == title ? title : null,
+          onChanged: (String? value) {
+            setState(() {
+              _jenisKuliner = value ?? ''; // Update nilai _jenisKuliner
+            });
+          },
+        ),
+        Text(title),
+      ],
+    );
+  }
+
+  Widget _buildJenisKulinerRadio() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Jenis Kuliner'),
+        Wrap(
+          spacing: 8.0,
+          children: [
+            _buildRadio('Ayam'),
+            _buildRadio('Bebek'),
+            _buildRadio('Ikan'),
+            _buildRadio('Seafood'),
+            _buildRadio('Daging'),
+            _buildRadio('Dessert'),
+            _buildRadio('Bakaran'),
+            _buildRadio('Tradisional'),
+            _buildRadio('Sup'),
+          ],
+        ),
+      ],
+    );
+  }
 }
