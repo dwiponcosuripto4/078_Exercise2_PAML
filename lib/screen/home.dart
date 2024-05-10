@@ -1,5 +1,6 @@
 import 'package:exercise2/controller/SpotController.dart';
 import 'package:exercise2/screen/create.dart';
+import 'package:exercise2/screen/detail.dart';
 import 'package:exercise2/screen/edit.dart';
 import 'package:flutter/material.dart';
 import 'package:exercise2/model/Spot.dart';
@@ -139,6 +140,17 @@ class _HomeViewState extends State<HomeView> {
                     SnackBar(content: Text('Failed to delete spot.')),
                   );
                 }
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailSpot(spot: spot),
+                  ),
+                );
               },
             ),
           ],
