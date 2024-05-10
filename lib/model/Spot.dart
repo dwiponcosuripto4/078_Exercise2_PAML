@@ -1,25 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class Spot {
+  final String id;
   final String namaTempat;
-  final List<String> jenisKuliner;
+  final String jenisKuliner;
   final String makananFavorit;
   final String minumanFavorit;
-  final String gambar;
   final String noTelepon;
   final String lokasi;
   final String jamBuka;
   final String jamTutup;
-  final int rating;
+  final String rating;
   Spot({
+    required this.id,
     required this.namaTempat,
     required this.jenisKuliner,
     required this.makananFavorit,
     required this.minumanFavorit,
-    required this.gambar,
     required this.noTelepon,
     required this.lokasi,
     required this.jamBuka,
@@ -28,23 +26,23 @@ class Spot {
   });
 
   Spot copyWith({
+    String? id,
     String? namaTempat,
-    List<String>? jenisKuliner,
+    String? jenisKuliner,
     String? makananFavorit,
     String? minumanFavorit,
-    String? gambar,
     String? noTelepon,
     String? lokasi,
     String? jamBuka,
     String? jamTutup,
-    int? rating,
+    String? rating,
   }) {
     return Spot(
+      id: id ?? this.id,
       namaTempat: namaTempat ?? this.namaTempat,
       jenisKuliner: jenisKuliner ?? this.jenisKuliner,
       makananFavorit: makananFavorit ?? this.makananFavorit,
       minumanFavorit: minumanFavorit ?? this.minumanFavorit,
-      gambar: gambar ?? this.gambar,
       noTelepon: noTelepon ?? this.noTelepon,
       lokasi: lokasi ?? this.lokasi,
       jamBuka: jamBuka ?? this.jamBuka,
@@ -55,11 +53,11 @@ class Spot {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'namaTempat': namaTempat,
       'jenisKuliner': jenisKuliner,
       'makananFavorit': makananFavorit,
       'minumanFavorit': minumanFavorit,
-      'gambar': gambar,
       'noTelepon': noTelepon,
       'lokasi': lokasi,
       'jamBuka': jamBuka,
@@ -70,16 +68,16 @@ class Spot {
 
   factory Spot.fromMap(Map<String, dynamic> map) {
     return Spot(
+      id: map['id'] as String,
       namaTempat: map['namaTempat'] as String,
-      jenisKuliner: List<String>.from(map['jenisKuliner'] as List<String>),
+      jenisKuliner: map['jenisKuliner'] as String,
       makananFavorit: map['makananFavorit'] as String,
       minumanFavorit: map['minumanFavorit'] as String,
-      gambar: map['gambar'] as String,
       noTelepon: map['noTelepon'] as String,
       lokasi: map['lokasi'] as String,
       jamBuka: map['jamBuka'] as String,
       jamTutup: map['jamTutup'] as String,
-      rating: map['rating'] as int,
+      rating: map['rating'] as String,
     );
   }
 
@@ -90,18 +88,18 @@ class Spot {
 
   @override
   String toString() {
-    return 'Spot(namaTempat: $namaTempat, jenisKuliner: $jenisKuliner, makananFavorit: $makananFavorit, minumanFavorit: $minumanFavorit, gambar: $gambar, noTelepon: $noTelepon, lokasi: $lokasi, jamBuka: $jamBuka, jamTutup: $jamTutup, rating: $rating)';
+    return 'Spot(id: $id, namaTempat: $namaTempat, jenisKuliner: $jenisKuliner, makananFavorit: $makananFavorit, minumanFavorit: $minumanFavorit, noTelepon: $noTelepon, lokasi: $lokasi, jamBuka: $jamBuka, jamTutup: $jamTutup, rating: $rating)';
   }
 
   @override
   bool operator ==(covariant Spot other) {
     if (identical(this, other)) return true;
 
-    return other.namaTempat == namaTempat &&
-        listEquals(other.jenisKuliner, jenisKuliner) &&
+    return other.id == id &&
+        other.namaTempat == namaTempat &&
+        other.jenisKuliner == jenisKuliner &&
         other.makananFavorit == makananFavorit &&
         other.minumanFavorit == minumanFavorit &&
-        other.gambar == gambar &&
         other.noTelepon == noTelepon &&
         other.lokasi == lokasi &&
         other.jamBuka == jamBuka &&
@@ -111,11 +109,11 @@ class Spot {
 
   @override
   int get hashCode {
-    return namaTempat.hashCode ^
+    return id.hashCode ^
+        namaTempat.hashCode ^
         jenisKuliner.hashCode ^
         makananFavorit.hashCode ^
         minumanFavorit.hashCode ^
-        gambar.hashCode ^
         noTelepon.hashCode ^
         lokasi.hashCode ^
         jamBuka.hashCode ^

@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:exercise2/model/Spot.dart';
 
@@ -11,28 +9,14 @@ class CreateSpotForm extends StatefulWidget {
 class _CreateSpotFormState extends State<CreateSpotForm> {
   final _formKey = GlobalKey<FormState>();
   final _namaTempatController = TextEditingController();
+  String _jenisKuliner = '';
   final _makananFavoritController = TextEditingController();
   final _minumanFavoritController = TextEditingController();
   final _noTeleponController = TextEditingController();
   final _lokasiController = TextEditingController();
   final _jamBukaController = TextEditingController();
   final _jamTutupController = TextEditingController();
-
-  List<String> _jenisKuliner = [];
-  int _rating = 1;
-  File? _image;
-
-  Future<void> _getImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedImage != null) {
-        _image = File(pickedImage.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+  final _rating = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +30,6 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
           key: _formKey,
           child: ListView(
             children: [
-              _buildImagePicker(),
               SizedBox(height: 20.0),
               TextFormField(
                 controller: _namaTempatController,
@@ -103,25 +86,21 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
               _buildRatingRadio(),
               SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    // Wrap the data and image path in a container before sending
-                    Spot data = Spot(
+                    Spot spot = Spot(
+                      id: '',
                       namaTempat: _namaTempatController.text,
                       jenisKuliner: _jenisKuliner,
                       makananFavorit: _makananFavoritController.text,
                       minumanFavorit: _minumanFavoritController.text,
-                      gambar: _image!.path,
                       noTelepon: _noTeleponController.text,
                       lokasi: _lokasiController.text,
                       jamBuka: _jamBukaController.text,
                       jamTutup: _jamTutupController.text,
-                      rating: _rating,
+                      rating: _rating.text,
                     );
-
-                    Navigator.pop(context,
-                        data); // Kembali ke halaman sebelumnya dengan membawa data yang baru ditambahkan
                   }
                 },
                 child: Text('Submit'),
@@ -133,40 +112,16 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
     );
   }
 
-  Widget _buildImagePicker() {
-    return Column(
-      children: [
-        _image == null
-            ? Text('Pilih gambar tempat')
-            : Image.file(
-                _image!,
-                height: 200.0,
-                width: 200.0,
-                fit: BoxFit.cover,
-              ),
-        SizedBox(height: 10.0),
-        ElevatedButton(
-          onPressed: _getImage,
-          child: Text('Pilih Gambar'),
-        ),
-      ],
-    );
-  }
-
   Widget _buildRadio(String title) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Radio(
           value: title,
-          groupValue: _jenisKuliner.contains(title) ? title : null,
+          groupValue: _jenisKuliner == title ? title : null,
           onChanged: (String? value) {
             setState(() {
-              if (_jenisKuliner.contains(value)) {
-                _jenisKuliner.remove(value);
-              } else {
-                _jenisKuliner.add(value!);
-              }
+              _jenisKuliner = value ?? ''; // Update nilai _jenisKuliner
             });
           },
         ),
@@ -210,11 +165,11 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio(
-                      value: rating,
-                      groupValue: _rating,
-                      onChanged: (int? value) {
+                      value: rating.toString(), // Mengubah nilai menjadi string
+                      groupValue: _rating.text, // Menggunakan _rating.text
+                      onChanged: (String? value) {
                         setState(() {
-                          _rating = value!;
+                          _rating.text = value ?? ''; // Mengubah nilai _rating
                         });
                       },
                     ),
