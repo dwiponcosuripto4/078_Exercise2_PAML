@@ -1,3 +1,4 @@
+import 'package:exercise2/controller/SpotController.dart';
 import 'package:flutter/material.dart';
 import 'package:exercise2/model/Spot.dart';
 
@@ -17,6 +18,7 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
   final _jamBukaController = TextEditingController();
   final _jamTutupController = TextEditingController();
   final _rating = TextEditingController();
+  final SpotController _spotController = SpotController();
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +103,14 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
                       jamTutup: _jamTutupController.text,
                       rating: _rating.text,
                     );
+                    bool success = await _spotController.addSpot(spot);
+                    if (success) {
+                      Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Gagal menambahkan spot.')),
+                      );
+                    }
                   }
                 },
                 child: Text('Submit'),
@@ -121,7 +131,7 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
           groupValue: _jenisKuliner == title ? title : null,
           onChanged: (String? value) {
             setState(() {
-              _jenisKuliner = value ?? ''; // Update nilai _jenisKuliner
+              _jenisKuliner = value ?? '';
             });
           },
         ),
@@ -165,11 +175,11 @@ class _CreateSpotFormState extends State<CreateSpotForm> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio(
-                      value: rating.toString(), // Mengubah nilai menjadi string
-                      groupValue: _rating.text, // Menggunakan _rating.text
+                      value: rating.toString(),
+                      groupValue: _rating.text,
                       onChanged: (String? value) {
                         setState(() {
-                          _rating.text = value ?? ''; // Mengubah nilai _rating
+                          _rating.text = value ?? '';
                         });
                       },
                     ),
