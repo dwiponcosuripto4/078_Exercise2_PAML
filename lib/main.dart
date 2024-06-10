@@ -1,3 +1,4 @@
+import 'package:exercise2/screen/LoginPage.dart';
 import 'package:exercise2/screen/home.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: HomeView());
+        home: LoginPage());
   }
 }

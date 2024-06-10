@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:exercise2/model/Spot.dart';
 
 class SpotService {
-  final String baseUrl = 'http://192.168.0.122/exercise2/';
+  final String baseUrl = 'http://192.168.100.157//exercise2/';
 
   Future<List<Spot>> getData() async {
     final response = await http.get(Uri.parse('$baseUrl/read.php'));
